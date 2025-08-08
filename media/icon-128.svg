@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0B1A"/>
+      <stop offset="50%" stop-color="#121634"/>
+      <stop offset="100%" stop-color="#171F4D"/>
+    </linearGradient>
+    <linearGradient id="neon" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7C4DFF"/>
+      <stop offset="50%" stop-color="#4F8CFF"/>
+      <stop offset="100%" stop-color="#24E5FF"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE59D"/>
+      <stop offset="55%" stop-color="#FFC94C"/>
+      <stop offset="100%" stop-color="#F1A12B"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect x="4" y="4" width="120" height="120" rx="28" fill="url(#bg)"/>
+  
+  <!-- Outer ring -->
+  <circle cx="64" cy="64" r="48" fill="none" stroke="url(#neon)" stroke-width="3" opacity="0.9"/>
+  
+  <!-- Robot head -->
+  <rect x="32" y="44" width="64" height="48" rx="12" fill="#1E244F" stroke="url(#neon)" stroke-width="2"/>
+  
+  <!-- Visor -->
+  <rect x="40" y="58" width="48" height="14" rx="7" fill="#0F1336" stroke="#26308A" stroke-width="1"/>
+  
+  <!-- Eyes -->
+  <circle cx="52" cy="65" r="3" fill="#24E5FF"/>
+  <circle cx="76" cy="65" r="3" fill="#24E5FF"/>
+  <rect x="58" y="63.5" width="12" height="3" rx="1.5" fill="#7C4DFF"/>
+  
+  <!-- Jaw -->
+  <path d="M42 80 H86" stroke="url(#neon)" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+  
+  <!-- Crown -->
+  <g transform="translate(64 36)">
+    <path d="M-19 0 L-10 -11 L0 0 L10 -11 L19 0 L19 5 L-19 5 Z" fill="url(#gold)" stroke="#B77B19" stroke-width="1"/>
+    <circle cx="-10" cy="-8" r="1.5" fill="#24E5FF"/>
+    <circle cx="0" cy="-9" r="1.5" fill="#7C4DFF"/>
+    <circle cx="10" cy="-8" r="1.5" fill="#4F8CFF"/>
+  </g>
+  
+  <!-- Coin badge -->
+  <g transform="translate(100 98)">
+    <circle r="12" fill="url(#gold)"/>
+    <path d="M-3 3 L0 -4 L3 3 M-1 0 H1" fill="none" stroke="#7C4DFF" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+</svg>

@@ -18,14 +18,23 @@
 2. **Paste Your URL** - `https://portal.withorb.com/view?token=...`
 3. **Watch Your Credits** - Status bar shows: `$(credit-card) Auggie Credits: 4009`
 
-## 🚀 Installation
+## 🚀 Installation & Setup
 
-### From VSIX (Recommended)
+### 📦 From VS Code Marketplace (Coming Soon!)
+```bash
+# Will be available soon on VS Code Marketplace
+code --install-extension augment-extensions.auggie-credits
+```
+
+### 📁 From VSIX (Current)
 ```bash
 code --install-extension auggie-credits-1.0.0.vsix
 ```
 
-### From Source
+### 🔧 Complete Setup Guide
+👉 **[Follow our detailed setup guide](SETUP.md)** with screenshots and step-by-step instructions!
+
+### 🏗️ From Source
 ```bash
 git clone https://github.com/svsairevanth12/augment-credits.git
 cd augment-credits
@@ -85,6 +94,10 @@ npx vsce package
 # Install locally
 code --install-extension auggie-credits-1.0.0.vsix
 ```
+
+## 📦 Publishing
+
+Want to publish this extension? Check out our **[Publishing Guide](PUBLISHING.md)** for complete VS Code Marketplace publishing instructions!
 
 ## 📝 License
 

@@ -3,7 +3,7 @@
   "displayName": "Auggie Credits",
   "description": "Track your Auggie credits directly in VS Code status bar",
   "version": "1.0.0",
-  "publisher": "your-publisher-name",
+  "publisher": "augment-extensions",
   "engines": {
     "vscode": "^1.74.0"
   },
@@ -49,11 +49,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/orb-credits-tracker.git"
+    "url": "https://github.com/svsairevanth12/augment-credits.git"
   },
   "bugs": {
-    "url": "https://github.com/your-username/orb-credits-tracker/issues"
+    "url": "https://github.com/svsairevanth12/augment-credits/issues"
   },
-  "homepage": "https://github.com/your-username/orb-credits-tracker#readme",
+  "homepage": "https://github.com/svsairevanth12/augment-credits#readme",
   "license": "MIT"
 }

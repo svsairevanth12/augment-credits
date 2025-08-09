@@ -18,17 +18,25 @@ Track your Auggie credits in real-time directly in your VS Code status bar.
 
 ### Step 2: View Your Usage
 1. On the subscription page, click the **"View Usage"** button
-2. You'll be redirected to a new page showing your usage details
+
+![View Usage Button](https://raw.githubusercontent.com/svsairevanth12/augment-credits/main/media/credits.png)
 
 ### Step 3: Copy Your Portal Link
 1. After clicking "View Usage", copy the **entire URL** from your browser's address bar
 2. This URL contains your unique token and looks like: `https://portal.withorb.com/view?token=...`
 
+![Copy Portal Link](https://raw.githubusercontent.com/svsairevanth12/augment-credits/main/media/link.png)
+
 ### Step 4: Configure the Extension
 1. In VS Code, look at the **bottom-right status bar**
 2. Click on the **"Auggie Credits"** item
+
+![Status Bar Location](https://raw.githubusercontent.com/svsairevanth12/augment-credits/main/media/image.png)
+
 3. When prompted, paste the URL you copied from Step 3
 4. Press Enter to save
+
+![Paste Portal Link](https://raw.githubusercontent.com/svsairevanth12/augment-credits/main/media/Screenshot%202025-08-09%20002054.png)
 
 ### Step 5: Verify Setup
 Your credits will now appear in the status bar as: `Auggie Credits: 4009`
@@ -61,35 +69,11 @@ No additional configuration required. The extension automatically:
 - Updates credit balance every 45 seconds
 - Persists settings across VS Code sessions
 
-## How It Works
-
-The extension integrates with the ORB API to provide real-time credit tracking:
-
-1. **Token Extraction** - Parses authentication token from your portal link
-2. **Customer Lookup** - Calls `/api/v1/customer_from_link?token=` to retrieve account information
-3. **Credit Retrieval** - Fetches current balance via `/api/v1/customers/{id}/ledger_summary`
-4. **Status Display** - Updates VS Code status bar with current credit count
-
-## Update Behavior
-
-- **Frequency**: Automatic updates every 45 seconds
-- **Method**: Silent background requests without UI interruption
-- **Persistence**: Settings and last known balance persist across VS Code restarts
-- **Error Handling**: Graceful degradation with clear error messaging
-
-## Development
-
-### Prerequisites
-- Node.js 16.x or higher
-- VS Code 1.74.0 or higher
-
-This extension is proprietary software developed for Augment Code users.
-
 ## Requirements
 
 - VS Code 1.74.0 or higher
 - Active Augment Code subscription
-- Internet connection for API access
+- Internet connection
 
 ## Troubleshooting
 
@@ -111,24 +95,4 @@ If you need to change your portal link:
 2. Type: "Set Auggie Portal Link"
 3. Paste your new portal URL
 
-## Known Issues
 
-- Portal links may expire and require periodic updates
-- Credit updates depend on ORB API availability
-- First-time setup requires manual configuration
-
-## Release Notes
-
-### 1.0.0
-- Initial release
-- Real-time credit tracking
-- Status bar integration
-- ORB API integration
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Support
-
-For setup assistance, see the built-in setup guide in this extension's documentation.

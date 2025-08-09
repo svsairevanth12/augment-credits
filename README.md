@@ -39,7 +39,7 @@ Your credits will now appear in the status bar as: `Auggie Credits: 4009`
 
 ### From VS Code Marketplace
 ```
-ext install auggiecredits.auggie-credits
+ext install Augieecredits.auggie-credits
 ```
 
 ### From VSIX Package

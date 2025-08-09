@@ -15,30 +15,25 @@
 2. Log in to your account
 
 ### Step 2: View Your Usage
-1. On the subscription page, click **"View Usage"** button
-
-![View Usage Button](media/credits.png)
+1. On the subscription page, look for the **"View Usage"** button
+2. Click the button to access your usage details
 
 ### Step 3: Get Your Portal Link
-1. After clicking "View Usage", you'll be redirected to a new page
+1. After clicking "View Usage", you'll be redirected to a new page showing your usage statistics
 2. **Copy the entire URL** from your browser's address bar
-
-![Copy Portal Link](media/link.png)
+3. The URL should look like: `https://portal.withorb.com/view?token=ImhpakNubzNvZmRBRk15NkEi.FGL6mNz23dyhRmMNntuAPEoSzJ8`
 
 *This URL contains your unique token and is what the extension needs to track your credits*
 
 ### Step 4: Open Auggie Credits Extension
 1. In VS Code, look at the **bottom-right status bar**
-2. Click on the **Auggie Credits** item
-
-![Status Bar Location](media/image.png)
+2. You should see an item that says **"Auggie Credits: Click to set link"**
+3. Click on this status bar item
 
 ### Step 5: Configure Your Portal Link
-1. A dialog will appear asking for your portal link
-2. **Paste the URL** you copied from Step 3
-3. Click **OK** or press **Enter**
-
-![Paste Portal Link](media/Screenshot%202025-08-09%20002054.png)
+1. A dialog box will appear asking for your portal link
+2. **Paste the complete URL** you copied from Step 3
+3. Press **Enter** or click **OK** to save
 
 ### Step 6: Enjoy Real-Time Credit Tracking! 🎉
 - Your credits will now appear in the status bar: `$(credit-card) Auggie Credits: 4009`

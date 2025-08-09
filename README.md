@@ -35,28 +35,7 @@ Your credits will now appear in the status bar as: `Auggie Credits: 4009`
 - Updates automatically every 45 seconds
 - Hover over the status bar item to see the last update time
 
-## Installation
 
-### From VS Code Marketplace
-```
-ext install Augieecredits.auggie-credits
-```
-
-### From VSIX Package
-```bash
-code --install-extension auggie-credits-1.0.0.vsix
-```
-
-### From Source
-```bash
-git clone https://github.com/svsairevanth12/augment-credits.git
-cd augment-credits
-npm install
-npx vsce package
-code --install-extension auggie-credits-1.0.0.vsix
-```
-
-For additional setup help with screenshots, see [SETUP.md](SETUP.md).
 
 ## Usage
 
@@ -104,24 +83,7 @@ The extension integrates with the ORB API to provide real-time credit tracking:
 - Node.js 16.x or higher
 - VS Code 1.74.0 or higher
 
-### Setup
-```bash
-# Clone repository
-git clone https://github.com/svsairevanth12/augment-credits.git
-cd augment-credits
-
-# Install dependencies
-npm install
-
-# Package extension
-npx vsce package
-
-# Install locally for testing
-code --install-extension auggie-credits-1.0.0.vsix
-```
-
-### Publishing
-For complete VS Code Marketplace publishing instructions, see [PUBLISHING.md](PUBLISHING.md).
+This extension is proprietary software developed for Augment Code users.
 
 ## Requirements
 
@@ -167,16 +129,6 @@ If you need to change your portal link:
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
 ## Support
 
-- **Issues**: [GitHub Issues](https://github.com/svsairevanth12/augment-credits/issues)
-- **Documentation**: [Setup Guide](SETUP.md)
-- **Repository**: [GitHub](https://github.com/svsairevanth12/augment-credits)
+For setup assistance, see the built-in setup guide in this extension's documentation.

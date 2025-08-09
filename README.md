@@ -1,40 +1,36 @@
-# 🤖👑 Auggie Credits - VS Code Extension
+# Auggie Credits
 
-> **Track your Auggie credits in real-time directly in your VS Code status bar!**
+Track your Auggie credits in real-time directly in your VS Code status bar.
 
-![Auggie Credits](media/logo.svg)
+## Features
 
-## ✨ Features
+- **Real-time Credit Tracking** - Automatically updates every 45 seconds
+- **Silent Background Updates** - No disruptive loading indicators
+- **Clean Status Bar Integration** - Displays credits with clear iconography
+- **Simple Setup** - One-time configuration with your portal link
+- **Secure Token Handling** - Uses official ORB API endpoints
 
-- 🔄 **Real-time Credit Tracking** - Updates every 45 seconds
-- 👑 **Awesome Robot King Design** - Custom designed logo and branding
-- 🚀 **Silent Updates** - No annoying loading spinners
-- 💎 **Clean Status Bar** - Shows credits with beautiful icons
-- 🔗 **Easy Setup** - Just paste your portal link once
+## Quick Start
 
-## 🎯 How It Works
+1. Install the extension
+2. Open Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`)
+3. Run "Set Auggie Portal Link"
+4. Paste your portal URL: `https://portal.withorb.com/view?token=...`
+5. Your credits will appear in the status bar
 
-1. **Set Your Portal Link** - Use Command Palette: "Set Auggie Portal Link"
-2. **Paste Your URL** - `https://portal.withorb.com/view?token=...`
-3. **Watch Your Credits** - Status bar shows: `$(credit-card) Auggie Credits: 4009`
+## Installation
 
-## 🚀 Installation & Setup
-
-### 📦 From VS Code Marketplace (Coming Soon!)
-```bash
-# Will be available soon on VS Code Marketplace
-code --install-extension augment-extensions.auggie-credits
+### From VS Code Marketplace
+```
+ext install augment-extensions.auggie-credits
 ```
 
-### 📁 From VSIX (Current)
+### From VSIX Package
 ```bash
 code --install-extension auggie-credits-1.0.0.vsix
 ```
 
-### 🔧 Complete Setup Guide
-👉 **[Follow our detailed setup guide](SETUP.md)** with screenshots and step-by-step instructions!
-
-### 🏗️ From Source
+### From Source
 ```bash
 git clone https://github.com/svsairevanth12/augment-credits.git
 cd augment-credits
@@ -43,82 +39,106 @@ npx vsce package
 code --install-extension auggie-credits-1.0.0.vsix
 ```
 
-## 🎨 Screenshots
+For detailed setup instructions with screenshots, see [SETUP.md](SETUP.md).
 
-The extension displays your credits in the VS Code status bar:
-- **Active**: `$(credit-card) Auggie Credits: 4009`
-- **Loading**: Silent updates (no spinner!)
-- **Error**: `$(error) Auggie Credits: Error`
-- **Setup**: `$(question) Auggie Credits: Click to set link`
+## Usage
 
-## ⚙️ Commands
+The extension displays your credit balance in the VS Code status bar with different states:
+
+- **Active**: `Auggie Credits: 4009` - Shows current credit balance
+- **Error**: `Auggie Credits: Error` - Indicates connection or authentication issues
+- **Setup Required**: `Auggie Credits: Click to set link` - Prompts for initial configuration
+
+## Commands
 
 | Command | Description |
 |---------|-------------|
-| `Set Auggie Portal Link` | Configure your ORB portal link |
+| `Set Auggie Portal Link` | Configure your ORB portal link for credit tracking |
 
-## 🔧 Configuration
+Access commands via Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`)
 
-No configuration needed! Just set your portal link and you're ready to go.
+## Configuration
 
-## 🤖 API Integration
+No additional configuration required. The extension automatically:
+- Extracts authentication tokens from your portal link
+- Connects to ORB API endpoints securely
+- Updates credit balance every 45 seconds
+- Persists settings across VS Code sessions
 
-The extension uses the official ORB API:
-1. Extracts token from your portal link
-2. Calls `/api/v1/customer_from_link?token=` to get customer info
-3. Calls `/api/v1/customers/{id}/ledger_summary` to get credit balance
-4. Updates status bar with current credits
+## How It Works
 
-## 🎭 Design
+The extension integrates with the ORB API to provide real-time credit tracking:
 
-- **Robot King Theme** - Futuristic crowned robot design
-- **Neon Gradients** - Purple to cyan color scheme
-- **Professional Icons** - Credit card and status indicators
-- **Clean Typography** - Easy to read in status bar
+1. **Token Extraction** - Parses authentication token from your portal link
+2. **Customer Lookup** - Calls `/api/v1/customer_from_link?token=` to retrieve account information
+3. **Credit Retrieval** - Fetches current balance via `/api/v1/customers/{id}/ledger_summary`
+4. **Status Display** - Updates VS Code status bar with current credit count
 
-## 🔄 Update Frequency
+## Update Behavior
 
-- **Interval**: Every 45 seconds
-- **Method**: Silent background updates
-- **Tooltip**: Shows last update timestamp
+- **Frequency**: Automatic updates every 45 seconds
+- **Method**: Silent background requests without UI interruption
+- **Persistence**: Settings and last known balance persist across VS Code restarts
+- **Error Handling**: Graceful degradation with clear error messaging
 
-## 🛠️ Development
+## Development
 
+### Prerequisites
+- Node.js 16.x or higher
+- VS Code 1.74.0 or higher
+
+### Setup
 ```bash
+# Clone repository
+git clone https://github.com/svsairevanth12/augment-credits.git
+cd augment-credits
+
 # Install dependencies
 npm install
 
 # Package extension
 npx vsce package
 
-# Install locally
+# Install locally for testing
 code --install-extension auggie-credits-1.0.0.vsix
 ```
 
-## 📦 Publishing
+### Publishing
+For complete VS Code Marketplace publishing instructions, see [PUBLISHING.md](PUBLISHING.md).
 
-Want to publish this extension? Check out our **[Publishing Guide](PUBLISHING.md)** for complete VS Code Marketplace publishing instructions!
+## Requirements
 
-## 📝 License
+- VS Code 1.74.0 or higher
+- Active Augment Code subscription
+- Internet connection for API access
 
-MIT License - Feel free to use and modify!
+## Known Issues
 
-## 🤝 Contributing
+- Initial setup requires manual portal link configuration
+- Credit updates depend on ORB API availability
+
+## Release Notes
+
+### 1.0.0
+- Initial release
+- Real-time credit tracking
+- Status bar integration
+- ORB API integration
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contributing
 
 1. Fork the repository
-2. Create your feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## 🎉 Credits
+## Support
 
-- **Design**: Custom Robot King logo and branding
-- **API**: ORB portal integration
-- **Framework**: VS Code Extension API
-
----
-
-**Made with 💜 for the Augment community**
-
-*Track your credits like a king! 🤖👑*
+- **Issues**: [GitHub Issues](https://github.com/svsairevanth12/augment-credits/issues)
+- **Documentation**: [Setup Guide](SETUP.md)
+- **Repository**: [GitHub](https://github.com/svsairevanth12/augment-credits)

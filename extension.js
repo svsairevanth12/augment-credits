@@ -1,9 +1,49 @@
 const vscode = require('vscode');
-const fetch = require('node-fetch');
+const https = require('https');
+const { URL } = require('url');
 
 let statusBarItem;
 let updateInterval;
 let context;
+
+// Helper function to make HTTPS requests (replaces node-fetch)
+function httpsRequest(url, options = {}) {
+    return new Promise((resolve, reject) => {
+        const urlObj = new URL(url);
+        const requestOptions = {
+            hostname: urlObj.hostname,
+            port: urlObj.port || 443,
+            path: urlObj.pathname + urlObj.search,
+            method: options.method || 'GET',
+            headers: options.headers || {},
+            timeout: options.timeout || 15000
+        };
+
+        const req = https.request(requestOptions, (res) => {
+            let data = '';
+            res.on('data', (chunk) => {
+                data += chunk;
+            });
+            res.on('end', () => {
+                resolve({
+                    ok: res.statusCode >= 200 && res.statusCode < 300,
+                    status: res.statusCode,
+                    statusText: res.statusMessage,
+                    json: () => Promise.resolve(JSON.parse(data)),
+                    text: () => Promise.resolve(data)
+                });
+            });
+        });
+
+        req.on('error', reject);
+        req.on('timeout', () => {
+            req.destroy();
+            reject(new Error('Request timeout'));
+        });
+
+        req.end();
+    });
+}
 
 /**
  * @param {vscode.ExtensionContext} extensionContext
@@ -116,7 +156,7 @@ async function fetchCredits(portalLink) {
         const customerInfoUrl = `https://portal.withorb.com/api/v1/customer_from_link?token=${token}`;
         console.log('Fetching customer info from:', customerInfoUrl);
 
-        const customerResponse = await fetch(customerInfoUrl, {
+        const customerResponse = await httpsRequest(customerInfoUrl, {
             timeout: 15000,
             headers: {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
@@ -178,7 +218,7 @@ async function fetchCredits(portalLink) {
         const ledgerUrl = `https://portal.withorb.com/api/v1/customers/${customerId}/ledger_summary?pricing_unit_id=${pricingUnitId}&token=${token}`;
         console.log('Fetching ledger summary from:', ledgerUrl);
 
-        const ledgerResponse = await fetch(ledgerUrl, {
+        const ledgerResponse = await httpsRequest(ledgerUrl, {
             timeout: 10000,
             headers: {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'

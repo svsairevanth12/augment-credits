@@ -2,7 +2,7 @@
   "name": "auggie-credits",
   "displayName": "Auggie Credits",
   "description": "Track your Auggie credits directly in VS Code status bar",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "publisher": "augieecredit",
   "engines": {
     "vscode": "^1.74.0"
@@ -39,9 +39,7 @@
     "lint": "echo 'No linting configured'",
     "test": "echo 'No tests configured'"
   },
-  "dependencies": {
-    "node-fetch": "^2.7.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "16.x",
     "@types/vscode": "^1.74.0",

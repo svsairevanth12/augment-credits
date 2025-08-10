@@ -9,12 +9,16 @@ let context;
  * @param {vscode.ExtensionContext} extensionContext
  */
 function activate(extensionContext) {
+    console.log('Auggie Credits extension is now active!');
     context = extensionContext;
-    
+
     // Create status bar item
     statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
     statusBarItem.command = 'auggieCredits.setPortalLink';
+    statusBarItem.text = '$(question) Auggie Credits: Click to set link';
+    statusBarItem.tooltip = 'Click to set your Auggie portal link';
     statusBarItem.show();
+    console.log('Status bar item created and shown');
 
     // Register command to set portal link
     const setLinkCommand = vscode.commands.registerCommand('auggieCredits.setPortalLink', async () => {

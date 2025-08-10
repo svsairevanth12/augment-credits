@@ -19,24 +19,24 @@ Track your Auggie credits in real-time directly in your VS Code status bar.
 ### Step 2: View Your Usage
 1. On the subscription page, click the **"View Usage"** button
 
-![View Usage Button](https://raw.githubusercontent.com/svsairevanth12/augment-credits/main/media/credits.png)
+![View Usage Button](./media/credits.png)
 
 ### Step 3: Copy Your Portal Link
 1. After clicking "View Usage", copy the **entire URL** from your browser's address bar
 2. This URL contains your unique token and looks like: `https://portal.withorb.com/view?token=...`
 
-![Copy Portal Link](https://raw.githubusercontent.com/svsairevanth12/augment-credits/main/media/link.png)
+![Copy Portal Link](./media/link.png)
 
 ### Step 4: Configure the Extension
 1. In VS Code, look at the **bottom-right status bar**
 2. Click on the **"Auggie Credits"** item
 
-![Status Bar Location](https://raw.githubusercontent.com/svsairevanth12/augment-credits/main/media/image.png)
+![Status Bar Location](./media/image.png)
 
 3. When prompted, paste the URL you copied from Step 3
 4. Press Enter to save
 
-![Paste Portal Link](https://raw.githubusercontent.com/svsairevanth12/augment-credits/main/media/Screenshot%202025-08-09%20002054.png)
+![Paste Portal Link](./media/Screenshot%202025-08-09%20002054.png)
 
 ### Step 5: Verify Setup
 Your credits will now appear in the status bar as: `Auggie Credits: 4009`

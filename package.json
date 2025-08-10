@@ -2,7 +2,7 @@
   "name": "auggie-credits",
   "displayName": "Auggie Credits",
   "description": "Track your Auggie credits directly in VS Code status bar",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "publisher": "augieecredit",
   "engines": {
     "vscode": "^1.74.0"

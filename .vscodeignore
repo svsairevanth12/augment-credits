@@ -1,0 +1,55 @@
+# Build outputs
+out/
+dist/
+*.vsix
+
+# Node modules
+node_modules/
+
+# Development files
+.vscode/
+.gitignore
+.git/
+
+# Documentation (keep only README.md)
+PUBLISHING.md
+SETUP.md
+
+# Source control
+.github/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory
+coverage/
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+.env.test

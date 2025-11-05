@@ -28,6 +28,16 @@
         "command": "auggieCredits.setPortalLink",
         "title": "Set Auggie Portal Link",
         "category": "Auggie Credits"
+      },
+      {
+        "command": "auggieCredits.resetUsageA",
+        "title": "Reset Usage A Counter",
+        "category": "Auggie Credits"
+      },
+      {
+        "command": "auggieCredits.resetUsageB",
+        "title": "Reset Usage B Counter",
+        "category": "Auggie Credits"
       }
     ]
   },

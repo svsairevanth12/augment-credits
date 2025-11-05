@@ -184,12 +184,12 @@ async function updateCredits() {
 
             if (usageA !== undefined) {
                 const usedA = usageA - credits;
-                statusText += ` | A:${usedA >= 0 ? '-' : '+'}${formatNumber(Math.abs(usedA))}`;
+                statusText += ` | A: ${usedA >= 0 ? '-' : '+'}${formatNumber(Math.abs(usedA))}`;
             }
 
             if (usageB !== undefined) {
                 const usedB = usageB - credits;
-                statusText += ` | B:${usedB >= 0 ? '-' : '+'}${formatNumber(Math.abs(usedB))}`;
+                statusText += ` | B: ${usedB >= 0 ? '-' : '+'}${formatNumber(Math.abs(usedB))}`;
             }
 
             statusBarItem.text = statusText;

@@ -200,12 +200,12 @@ async function updateCredits() {
 
             if (usageA !== undefined) {
                 const usedA = usageA - credits;
-                tooltip += `\nUsage A: ${usedA >= 0 ? '' : '+'}${formatNumber(usedA)} credits since reset`;
+                tooltip += `\nUsage A: ${usedA >= 0 ? '-' : '+'}${formatNumber(Math.abs(usedA))} credits since reset`;
             }
 
             if (usageB !== undefined) {
                 const usedB = usageB - credits;
-                tooltip += `\nUsage B: ${usedB >= 0 ? '' : '+'}${formatNumber(usedB)} credits since reset`;
+                tooltip += `\nUsage B: ${usedB >= 0 ? '-' : '+'}${formatNumber(Math.abs(usedB))} credits since reset`;
             }
 
             // Add credit blocks info if available

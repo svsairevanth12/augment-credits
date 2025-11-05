@@ -6,6 +6,11 @@ let statusBarItem;
 let updateInterval;
 let context;
 
+// Helper function to format numbers with commas
+function formatNumber(num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
 // Helper function to make HTTPS requests (replaces node-fetch)
 function httpsRequest(url, options = {}) {
     return new Promise((resolve, reject) => {
@@ -81,10 +86,10 @@ function activate(extensionContext) {
             startPolling();
         }
     });
-    
+
     context.subscriptions.push(setLinkCommand);
     context.subscriptions.push(statusBarItem);
-    
+
     // Initialize
     initializeExtension();
 }
@@ -125,8 +130,9 @@ async function updateCredits() {
         const credits = await fetchCredits(portalLink);
 
         if (credits !== null) {
-            statusBarItem.text = `$(credit-card) Auggie Credits: ${credits}`;
-            statusBarItem.tooltip = `Current Auggie credits: ${credits}\nClick to update portal link\nLast updated: ${new Date().toLocaleTimeString()}`;
+            const formattedCredits = formatNumber(credits);
+            statusBarItem.text = `$(credit-card) Auggie Credits: ${formattedCredits}`;
+            statusBarItem.tooltip = `Current Auggie credits: ${formattedCredits}\nClick to update portal link\nLast updated: ${new Date().toLocaleTimeString()}`;
         } else {
             throw new Error('Could not parse credits from response');
         }
@@ -196,20 +202,20 @@ async function fetchCredits(portalLink) {
             display_name: unit.display_name
         })));
 
-        // Use the first pricing unit (or find the one for "User Messages")
+        // Use the first pricing unit (or find the one for "Credits")
         let pricingUnitId = pricingUnits[0].id;
 
-        // Try to find "User Messages" pricing unit specifically
-        const userMessageUnit = pricingUnits.find(unit =>
-            unit.name === 'usermessages' ||
-            unit.display_name === 'User Messages'
+        // Try to find "Credits" pricing unit specifically
+        const creditsUnit = pricingUnits.find(unit =>
+            unit.name === 'credits' ||
+            unit.display_name === 'Credits'
         );
 
-        if (userMessageUnit) {
-            pricingUnitId = userMessageUnit.id;
-            console.log('✅ Found User Messages pricing unit:', userMessageUnit);
+        if (creditsUnit) {
+            pricingUnitId = creditsUnit.id;
+            console.log('✅ Found Credits pricing unit:', creditsUnit);
         } else {
-            console.log('⚠️ User Messages unit not found, using first unit:', pricingUnits[0]);
+            console.log('⚠️ Credits unit not found, using first unit:', pricingUnits[0]);
         }
 
         console.log(`🎯 Using Customer ID: ${customerId}, Pricing Unit ID: ${pricingUnitId}`);
@@ -239,7 +245,8 @@ async function fetchCredits(portalLink) {
             const credits = parseFloat(creditsBalance);
             if (!isNaN(credits)) {
                 console.log('✅ Successfully got credits from ORB API:', credits);
-                return credits;
+                // Return the credits as an integer for cleaner display
+                return Math.floor(credits);
             }
         }
 

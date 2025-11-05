@@ -219,7 +219,13 @@ async function updateCredits() {
                 });
             }
 
-            tooltip += `\n\nClick to update portal link`;
+            // Add reset instructions
+            tooltip += `\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`;
+            tooltip += `\nCommands (Ctrl+Shift+P):`;
+            tooltip += `\n  • Reset Usage A Counter`;
+            tooltip += `\n  • Reset Usage B Counter`;
+            tooltip += `\n  • Set Auggie Portal Link`;
+
             statusBarItem.tooltip = tooltip;
         } else {
             throw new Error('Could not parse credits from response');

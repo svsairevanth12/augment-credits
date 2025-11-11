@@ -59,13 +59,140 @@ function activate(extensionContext) {
 
     // Create status bar item
     statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
-    statusBarItem.command = 'auggieCredits.setPortalLink';
+    statusBarItem.command = 'auggieCredits.showDetails';
     statusBarItem.text = '$(question) Auggie Credits: Click to set link';
     statusBarItem.tooltip = 'Click to set your Auggie portal link';
     statusBarItem.show();
     console.log('Status bar item created and shown');
 
-    // Register command to set portal link
+    // Register command to show credit details
+    const showDetailsCommand = vscode.commands.registerCommand('auggieCredits.showDetails', async () => {
+        const portalLink = context.globalState.get('auggiePortalLink');
+
+        // If no portal link is set, prompt to set it
+        if (!portalLink) {
+            const link = await vscode.window.showInputBox({
+                prompt: 'Enter your Auggie portal link',
+                placeholder: 'https://portal.withorb.com/view?token=...',
+                validateInput: (value) => {
+                    if (!value) return 'Portal link is required';
+                    if (!value.includes('portal.withorb.com') || !value.includes('token=')) {
+                        return 'Please enter a valid Auggie portal link with token';
+                    }
+                    return null;
+                }
+            });
+
+            if (link) {
+                await context.globalState.update('auggiePortalLink', link);
+                vscode.window.showInformationMessage('Auggie portal link saved successfully!');
+                await updateCredits();
+                startPolling();
+            }
+            return;
+        }
+
+        // Show credit details in a quick pick menu
+        try {
+            const creditsData = await fetchCredits(portalLink);
+            if (creditsData !== null) {
+                const credits = creditsData.balance;
+                const formattedCredits = formatNumber(credits);
+                const usageA = context.globalState.get('usageABaseline');
+                const usageB = context.globalState.get('usageBBaseline');
+
+                const items = [];
+
+                // Total credits
+                items.push({
+                    label: `$(credit-card) Total Credits: ${formattedCredits}`,
+                    description: 'Current balance',
+                    detail: `Last updated: ${new Date().toLocaleTimeString()}`
+                });
+
+                // Usage A counter
+                if (usageA !== undefined) {
+                    const usedA = usageA - credits;
+                    items.push({
+                        label: `$(graph) Usage A: ${usedA >= 0 ? '-' : '+'}${formatNumber(Math.abs(usedA))}`,
+                        description: usedA >= 0 ? 'Credits consumed' : 'Credits added',
+                        detail: `Baseline: ${formatNumber(usageA)} credits`
+                    });
+                }
+
+                // Usage B counter
+                if (usageB !== undefined) {
+                    const usedB = usageB - credits;
+                    items.push({
+                        label: `$(graph) Usage B: ${usedB >= 0 ? '-' : '+'}${formatNumber(Math.abs(usedB))}`,
+                        description: usedB >= 0 ? 'Credits consumed' : 'Credits added',
+                        detail: `Baseline: ${formatNumber(usageB)} credits`
+                    });
+                }
+
+                // Credit blocks
+                if (creditsData.creditBlocks && creditsData.creditBlocks.length > 0) {
+                    items.push({
+                        label: '$(package) Credit Blocks',
+                        description: `${creditsData.creditBlocks.length} block(s)`,
+                        kind: vscode.QuickPickItemKind.Separator
+                    });
+
+                    creditsData.creditBlocks.forEach(block => {
+                        if (block.balance) {
+                            const expiryDate = new Date(block.expiry_date);
+                            items.push({
+                                label: `  ${formatNumber(Math.floor(parseFloat(block.balance)))} credits`,
+                                description: `Expires ${expiryDate.toLocaleDateString()}`,
+                                detail: expiryDate < new Date() ? '⚠️ Expired' : ''
+                            });
+                        }
+                    });
+                }
+
+                // Actions
+                items.push({
+                    label: '$(gear) Actions',
+                    kind: vscode.QuickPickItemKind.Separator
+                });
+
+                items.push({
+                    label: '$(refresh) Reset Usage A Counter',
+                    description: 'Set new baseline for Usage A'
+                });
+
+                items.push({
+                    label: '$(refresh) Reset Usage B Counter',
+                    description: 'Set new baseline for Usage B'
+                });
+
+                items.push({
+                    label: '$(link) Update Portal Link',
+                    description: 'Change your Auggie portal link'
+                });
+
+                const selected = await vscode.window.showQuickPick(items, {
+                    placeHolder: 'Auggie Credits Details',
+                    title: 'Auggie Credits'
+                });
+
+                // Handle action selection
+                if (selected) {
+                    if (selected.label.includes('Reset Usage A')) {
+                        await vscode.commands.executeCommand('auggieCredits.resetUsageA');
+                    } else if (selected.label.includes('Reset Usage B')) {
+                        await vscode.commands.executeCommand('auggieCredits.resetUsageB');
+                    } else if (selected.label.includes('Update Portal Link')) {
+                        await vscode.commands.executeCommand('auggieCredits.setPortalLink');
+                    }
+                }
+            }
+        } catch (error) {
+            vscode.window.showErrorMessage(`Failed to fetch credits: ${error.message}`);
+        }
+    });
+
+    // Register command to set portal link (for command palette)
     const setLinkCommand = vscode.commands.registerCommand('auggieCredits.setPortalLink', async () => {
         const link = await vscode.window.showInputBox({
             prompt: 'Enter your Auggie portal link',
@@ -127,6 +254,7 @@ function activate(extensionContext) {
         }
     });
 
+    context.subscriptions.push(showDetailsCommand);
     context.subscriptions.push(setLinkCommand);
     context.subscriptions.push(resetUsageACommand);
     context.subscriptions.push(resetUsageBCommand);
@@ -179,8 +307,8 @@ async function updateCredits() {
             const usageA = context.globalState.get('usageABaseline');
             const usageB = context.globalState.get('usageBBaseline');
 
-            // Build status text with trip odometers
-            let statusText = `$(credit-card) ${formattedCredits}`;
+            // Build status text with trip odometers - cleaner format
+            let statusText = `${formattedCredits}`;
 
             if (usageA !== undefined) {
                 const usedA = usageA - credits;

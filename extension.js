@@ -308,7 +308,7 @@ async function updateCredits() {
             const usageB = context.globalState.get('usageBBaseline');
 
             // Build status text with trip odometers - cleaner format
-            let statusText = `${formattedCredits}`;
+            let statusText = `Credits: ${formattedCredits}`;
 
             if (usageA !== undefined) {
                 const usedA = usageA - credits;
